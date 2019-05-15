@@ -1,0 +1,7 @@
+{
+    "prettier.jsxBracketSameLine": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.requireConfig": true,
+    "prettier.tslintIntegration": true,
+    "prettier.eslintIntegration": true
+}

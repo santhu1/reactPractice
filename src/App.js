@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+class App extends React.Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  constructor(props) {
+    super(props);
+    this.state={ value:'',
+    todos:[]
+  };  
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleChange(evt){
+    this.setState({value:evt.target.value})
+  }
+  handleSubmit(event){
+    event.preventDefault();
+  }
+  save() {
+    var todos = [...this.state.todos];
+    todos.push(this.newText.value);
+    this.setState({todos});
+  }
+  clearAll() {
+    let todos = [...this.state.todos];
+    todos=[];
+
+    this.setState({todos});
+  }
+
+  
+  render() {
+    return (
+      <div className= "App">
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <label className=''>
+            Name:
+        </label>
+          <input type="text"
+            ref={(name) => { this.newText = name }}
+          />
+          <button onClick={this.save.bind(this)} className="btn btn-primary glyphicon glyphicon-floppy-saved">Save
+              </button>
+          <ul className="No-list-style">
+            {this.state.todos.map(todo =>
+              todo && <li>{todo}</li>
+            )}
+          </ul>
+        </form>
+        <button onClick={this.clearAll.bind(this)} className="btn btn-primary glyphicon glyphicon-floppy-saved">Clear all</button>
+      </div>
+    )
+  }
 }
-
-export default App;
+export default App
